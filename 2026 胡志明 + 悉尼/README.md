@@ -6,7 +6,7 @@
 - 地图：Leaflet + OpenStreetMap
 - 无需 Google Maps API Key / Billing
 - 实际导航可从路书跳转 Google Maps
-- GitHub Pages 部署由仓库根目录 `.github/workflows/pages.yml` 自动完成
+- 不使用自定义 GitHub Actions 工作流
 
 ## Public-safe 处理
 
@@ -22,7 +22,12 @@
 
 ## GitHub Pages
 
-仓库已使用 GitHub Actions 部署 Pages。`main` 分支中本目录更新后会自动发布。
+推荐使用 GitHub Pages 的 **Deploy from a branch**，发布源设为：
+
+- Branch: `main`
+- Folder: `/(root)`
+
+仓库根目录的 `index.html` 会自动跳转到本路书目录。
 
 访问地址：
 
