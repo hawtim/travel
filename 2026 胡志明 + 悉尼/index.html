@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f1eb">
+  <title>2026 国庆｜胡志明 + 悉尼 路书</title>
+  <meta name="description" content="2026 国庆胡志明 + 悉尼互动路书：每日路线、公共交通与可选加密点。">
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="eyebrow">ROADBOOK · 2026</div>
+      <h1>胡志明 + 悉尼</h1>
+      <p class="subtitle">2026 国庆 · 轻装单包<br>城市 + 海岸 + 山地</p>
+
+      <div class="toolbar">
+        <button id="copyMain" class="btn primary">复制全部主线</button>
+        <button class="btn" onclick="window.print()">打印 / PDF</button>
+      </div>
+
+      <div class="metrics">
+        <div><b>13</b><span>天行程</span></div>
+        <div><b>2</b><span>国家</span></div>
+        <div><b>20L</b><span>单包</span></div>
+      </div>
+
+      <div class="toggle-row">
+        <div><strong>显示高密度可选点</strong><small>关闭后只显示每天主线</small></div>
+        <label class="switch"><input id="optionalToggle" type="checkbox" checked><span></span></label>
+      </div>
+
+      <div class="section-title">每日行程</div>
+      <nav id="days" class="days"></nav>
+
+      <p class="foot">公开分享版：住宿仅显示区域，航班仅显示大致时段。网页内地图使用 Leaflet + OpenStreetMap；路线连线为规划示意，不是实时导航。悉尼当天班次、站台与 trackwork 以 Transport for NSW / Google Maps 为准。</p>
+    </aside>
+
+    <main class="main">
+      <section class="map-wrap">
+        <div id="map"></div>
+        <div id="mapFallback" class="map-fallback">OpenStreetMap 地图资源未加载。行程内容仍可正常查看。</div>
+        <div class="map-top">
+          <div class="map-left">
+            <div id="mapTitle" class="pill">每日路线</div>
+            <button id="fitRouteBtn" class="pill">适应完整路线</button>
+          </div>
+          <div class="pill legend desktop-only"><span><i class="main-dot"></i>主线</span><span><i class="optional-dot"></i>可选</span><span><i class="hotel-dot"></i>住宿区域</span></div>
+        </div>
+        <div id="mapScopeNote" class="map-note">Leaflet + OpenStreetMap · 切换日期后自动完整适配当天路线。</div>
+      </section>
+
+      <section class="detail">
+        <div class="detail-head">
+          <div><h2 id="detailTitle"></h2><div id="detailMeta" class="detail-meta"></div></div>
+          <div class="detail-actions">
+            <button id="copyDay" class="btn">复制当天</button>
+            <button id="shareDay" class="btn">复制此日链接</button>
+            <button id="openGoogle" class="btn">Google Maps 导航</button>
+          </div>
+        </div>
+        <div class="route-grid">
+          <div id="timeline" class="timeline"></div>
+          <aside>
+            <div class="panel"><h3>当天判断</h3><p id="strategy"></p></div>
+            <div class="panel"><h3>交通顺序</h3><div id="transports"></div></div>
+            <div class="panel"><h3>住宿 / 转场</h3><p id="stay"></p></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast">已复制</div>
+  <script src="data.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
