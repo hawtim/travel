@@ -1,4 +1,4 @@
-/* UX fix v4: one document scroll, compact map, stable timeline layout, clear map controls. */
+/* UX fix v5: one document scroll, compact map, stable timeline layout, clear map controls. */
 html,body{
   height:auto !important;
   min-height:100%;
@@ -81,6 +81,11 @@ body{
   text-overflow:ellipsis;
 }
 
+/* The bottom map hint is redundant in the final roadbook UI. */
+.map-note{
+  display:none !important;
+}
+
 /* Desktop sidebar remains independently usable while the main document scrolls. */
 @media (min-width:901px){
   .sidebar{
@@ -135,8 +140,5 @@ body{
   }
   #mapTitle{
     max-width:46vw;
-  }
-  .map-note{
-    display:none;
   }
 }
