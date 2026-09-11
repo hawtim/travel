@@ -1,4 +1,4 @@
-/* UX fix v5: one document scroll, compact map, stable timeline layout, clear map controls. */
+/* UX fix v6: one document scroll, stable timeline, 50% viewport map, clear map controls. */
 html,body{
   height:auto !important;
   min-height:100%;
@@ -8,8 +8,6 @@ body{
   overflow-x:hidden !important;
 }
 
-/* Only the real page <main> gets layout rules. Timeline stops can also have type="main",
-   so never target a bare .main selector here. */
 .app{
   height:auto !important;
   min-height:100vh;
@@ -23,7 +21,6 @@ body{
   min-width:0;
 }
 
-/* Keep the itinerary in normal document flow so every stop contributes to page height. */
 .detail{
   height:auto !important;
   min-height:0 !important;
@@ -43,10 +40,7 @@ body{
   width:100%;
 }
 
-/* Critical fix: itinerary items with data type "main" receive class="stop main".
-   The original page layout also uses class="main", which previously made those stops
-   inherit page-level height/display rules and caused the alternating horizontal/vertical offset.
-   Force every main stop back to the same two-column timeline grid as the other stop types. */
+/* Itinerary items with type="main" also receive class="main"; keep them as timeline rows. */
 .timeline .stop.main{
   height:auto !important;
   min-height:0 !important;
@@ -66,7 +60,7 @@ body{
   min-width:0;
 }
 
-/* Leave a permanent safe zone for Leaflet's +/- control in the top-left corner. */
+/* Reserve the top-left corner for Leaflet +/- controls. */
 .map-top{
   left:72px !important;
 }
@@ -81,12 +75,22 @@ body{
   text-overflow:ellipsis;
 }
 
-/* The bottom map hint is redundant in the final roadbook UI. */
+/* Final roadbook UI: no bottom map hint. */
 .map-note{
   display:none !important;
 }
 
-/* Desktop sidebar remains independently usable while the main document scrolls. */
+/* Keep the map at exactly half of the visible viewport in both portrait and landscape. */
+.map-wrap{
+  height:50vh !important;
+  height:50dvh !important;
+  min-height:0 !important;
+}
+#map{
+  height:100% !important;
+  min-height:0 !important;
+}
+
 @media (min-width:901px){
   .sidebar{
     position:sticky;
@@ -94,10 +98,6 @@ body{
     height:100vh;
     overflow-y:auto;
     overflow-x:hidden;
-  }
-  .map-wrap{
-    height:clamp(300px,42vh,470px);
-    min-height:300px;
   }
 }
 
@@ -113,14 +113,6 @@ body{
   .app > main.main{
     min-height:0;
   }
-  .map-wrap{
-    height:clamp(270px,36vh,360px);
-    min-height:270px;
-  }
-  #map{
-    height:100% !important;
-    min-height:0 !important;
-  }
   .map-top{
     left:66px !important;
   }
@@ -130,10 +122,6 @@ body{
 }
 
 @media (max-width:560px){
-  .map-wrap{
-    height:clamp(240px,32vh,320px);
-    min-height:240px;
-  }
   .map-top{
     left:64px !important;
     right:10px !important;
