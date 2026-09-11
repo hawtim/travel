@@ -1,4 +1,4 @@
-/* UX fix v3: one document scroll, compact map, stable timeline layout. */
+/* UX fix v4: one document scroll, compact map, stable timeline layout, clear map controls. */
 html,body{
   height:auto !important;
   min-height:100%;
@@ -66,6 +66,21 @@ body{
   min-width:0;
 }
 
+/* Leave a permanent safe zone for Leaflet's +/- control in the top-left corner. */
+.map-top{
+  left:72px !important;
+}
+.map-left{
+  min-width:0;
+  flex-wrap:wrap;
+}
+#mapTitle{
+  max-width:min(62vw,520px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
 /* Desktop sidebar remains independently usable while the main document scrolls. */
 @media (min-width:901px){
   .sidebar{
@@ -101,12 +116,25 @@ body{
     height:100% !important;
     min-height:0 !important;
   }
+  .map-top{
+    left:66px !important;
+  }
+  #mapTitle{
+    max-width:52vw;
+  }
 }
 
 @media (max-width:560px){
   .map-wrap{
     height:clamp(240px,32vh,320px);
     min-height:240px;
+  }
+  .map-top{
+    left:64px !important;
+    right:10px !important;
+  }
+  #mapTitle{
+    max-width:46vw;
   }
   .map-note{
     display:none;
