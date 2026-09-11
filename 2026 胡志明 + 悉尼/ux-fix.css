@@ -1,0 +1,38 @@
+/* UX fix: keep the itinerary reachable while preserving an interactive map. */
+@media (min-width:901px){
+  .main{
+    height:100%;
+    display:block;
+    overflow-y:auto;
+    overflow-x:hidden;
+    overscroll-behavior:contain;
+    scroll-behavior:smooth;
+  }
+  .map-wrap{
+    height:clamp(320px,44vh,500px);
+    min-height:320px;
+  }
+  .detail{
+    overflow:visible;
+  }
+}
+
+@media (max-width:900px){
+  #map{
+    height:clamp(280px,38vh,380px);
+    min-height:280px;
+  }
+  .map-wrap{
+    min-height:0;
+  }
+}
+
+@media (max-width:560px){
+  #map{
+    height:clamp(250px,34vh,340px);
+    min-height:250px;
+  }
+  .map-note{
+    display:none;
+  }
+}
