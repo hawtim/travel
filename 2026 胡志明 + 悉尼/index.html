@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="ux-fix.css">
 </head>
 <body>
   <div class="app">
@@ -51,7 +52,7 @@
           </div>
           <div class="pill legend desktop-only"><span><i class="main-dot"></i>主线</span><span><i class="optional-dot"></i>可选</span><span><i class="hotel-dot"></i>住宿区域</span></div>
         </div>
-        <div id="mapScopeNote" class="map-note">Leaflet + OpenStreetMap · 切换日期后自动完整适配当天路线。</div>
+        <div id="mapScopeNote" class="map-note">滚轮用于浏览页面；地图缩放请使用 + / −。切换日期后自动完整适配当天路线。</div>
       </section>
 
       <section class="detail">
@@ -78,5 +79,6 @@
   <script src="data.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="app.js"></script>
+  <script src="ux-fix.js"></script>
 </body>
 </html>
