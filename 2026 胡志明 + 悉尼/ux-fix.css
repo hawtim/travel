@@ -1,4 +1,4 @@
-/* UX fix v2: one document scroll, natural timeline height, compact map. */
+/* UX fix v3: one document scroll, compact map, stable timeline layout. */
 html,body{
   height:auto !important;
   min-height:100%;
@@ -8,13 +8,14 @@ body{
   overflow-x:hidden !important;
 }
 
-/* The page itself owns vertical scrolling. Avoid a nested scroll container in .main. */
+/* Only the real page <main> gets layout rules. Timeline stops can also have type="main",
+   so never target a bare .main selector here. */
 .app{
   height:auto !important;
   min-height:100vh;
   align-items:start;
 }
-.main{
+.app > main.main{
   height:auto !important;
   min-height:100vh;
   display:block !important;
@@ -39,6 +40,30 @@ body{
 }
 .stop{
   min-height:0;
+  width:100%;
+}
+
+/* Critical fix: itinerary items with data type "main" receive class="stop main".
+   The original page layout also uses class="main", which previously made those stops
+   inherit page-level height/display rules and caused the alternating horizontal/vertical offset.
+   Force every main stop back to the same two-column timeline grid as the other stop types. */
+.timeline .stop.main{
+  height:auto !important;
+  min-height:0 !important;
+  display:grid !important;
+  grid-template-columns:34px minmax(0,1fr) !important;
+  grid-template-rows:auto !important;
+  overflow:visible !important;
+  align-items:start;
+}
+.timeline .stop.main > .num{
+  grid-column:1;
+  grid-row:1;
+}
+.timeline .stop.main > .num + div{
+  grid-column:2;
+  grid-row:1;
+  min-width:0;
 }
 
 /* Desktop sidebar remains independently usable while the main document scrolls. */
@@ -65,7 +90,7 @@ body{
     height:auto;
     overflow:visible;
   }
-  .main{
+  .app > main.main{
     min-height:0;
   }
   .map-wrap{
