@@ -1,36 +1,87 @@
-/* UX fix: keep the itinerary reachable while preserving an interactive map. */
+/* UX fix v2: one document scroll, natural timeline height, compact map. */
+html,body{
+  height:auto !important;
+  min-height:100%;
+}
+body{
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+}
+
+/* The page itself owns vertical scrolling. Avoid a nested scroll container in .main. */
+.app{
+  height:auto !important;
+  min-height:100vh;
+  align-items:start;
+}
+.main{
+  height:auto !important;
+  min-height:100vh;
+  display:block !important;
+  overflow:visible !important;
+  min-width:0;
+}
+
+/* Keep the itinerary in normal document flow so every stop contributes to page height. */
+.detail{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+}
+.route-grid{
+  align-items:start;
+}
+.timeline{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+.stop{
+  min-height:0;
+}
+
+/* Desktop sidebar remains independently usable while the main document scrolls. */
 @media (min-width:901px){
-  .main{
-    height:100%;
-    display:block;
+  .sidebar{
+    position:sticky;
+    top:0;
+    height:100vh;
     overflow-y:auto;
     overflow-x:hidden;
-    overscroll-behavior:contain;
-    scroll-behavior:smooth;
   }
   .map-wrap{
-    height:clamp(320px,44vh,500px);
-    min-height:320px;
-  }
-  .detail{
-    overflow:visible;
+    height:clamp(300px,42vh,470px);
+    min-height:300px;
   }
 }
 
 @media (max-width:900px){
-  #map{
-    height:clamp(280px,38vh,380px);
-    min-height:280px;
+  .app{
+    display:block;
+  }
+  .sidebar{
+    position:static;
+    height:auto;
+    overflow:visible;
+  }
+  .main{
+    min-height:0;
   }
   .map-wrap{
-    min-height:0;
+    height:clamp(270px,36vh,360px);
+    min-height:270px;
+  }
+  #map{
+    height:100% !important;
+    min-height:0 !important;
   }
 }
 
 @media (max-width:560px){
-  #map{
-    height:clamp(250px,34vh,340px);
-    min-height:250px;
+  .map-wrap{
+    height:clamp(240px,32vh,320px);
+    min-height:240px;
   }
   .map-note{
     display:none;
